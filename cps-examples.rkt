@@ -30,25 +30,29 @@
 
 ; e.g.  (append (lambda (_ lst) (print lst)) '(1) '(2)) 
 
-;(define (append k lst0 lst1) 
-;  (let ([nullb (null? lst0)]) 
-;    (if nullb
-;        (k k lst1)	  
-;        'TODO)))
+(define (append k lst0 lst1)
+  (let ([null (null? lst0)])
+  (if null
+      (k k lst1)
+      (let ([car-lst0 (car lst0)])
+        (let ([cdr-lst0 (cdr lst0)])
+             (append (lambda (_ tail)
+                          (let ([rv (cons car-lst0 tail)])
+                            (k k rv)))
+                     cdr-lst0
+                     lst1))))))
 
-(define (append k lst0 lst1) 
-    (if nullb
-        (k k lst1)	  
-        'TODO)))
+
 
 ; What makes reverse simpler to CPS convert in some sense?    
 
 (define (reverse k lst)
   (define (trev k1 lst0 lst1)
     (if (null? lst0)
-        (k1 lst1)
+        (k1 k1 lst1)
         (trev k1 (cdr lst0) (cons (car lst0) lst1))))
-  (trev k lst '()))   
+  (trev k lst '()))
+
 
 
 
