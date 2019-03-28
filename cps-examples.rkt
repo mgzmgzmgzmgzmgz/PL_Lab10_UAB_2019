@@ -18,7 +18,7 @@
 ;    
 ; Honor pledge (please write your name.)
 ;    
-; I Micah Giles have completed this code myself, without
+; I Micah Giles  have completed this code myself, without
 ; unauthorized assistance, and have followed the academic honor code.	
 ; 
 ; Edit the code below to complete your solution. 
@@ -30,18 +30,25 @@
 
 ; e.g.  (append (lambda (_ lst) (print lst)) '(1) '(2)) 
 
+;(define (append k lst0 lst1) 
+;  (let ([nullb (null? lst0)]) 
+;    (if nullb
+;        (k k lst1)	  
+;        'TODO)))
+
 (define (append k lst0 lst1) 
-  (let ([nullb (null? lst0)]) 
     (if nullb
         (k k lst1)	  
         'TODO)))
 
 ; What makes reverse simpler to CPS convert in some sense?    
 
-(define (reverse k lst) 
-  (define (trev lst0 lst1)	  
-    'TODO)	  
-  'TODO)    
+(define (reverse k lst)
+  (define (trev k1 lst0 lst1)
+    (if (null? lst0)
+        (k1 lst1)
+        (trev k1 (cdr lst0) (cons (car lst0) lst1))))
+  (trev k lst '()))   
 
 
 
